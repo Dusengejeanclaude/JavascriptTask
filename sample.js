@@ -1,6 +1,5 @@
 $(document).ready(function(){
     var subject_points;
-    var sum;
     var average;
     function score_indicate(){
       // By making such a description, in the variable called subject_points
@@ -13,11 +12,10 @@ $(document).ready(function(){
                             ];
   
       // Furthermore, by making such a description, the total point is output to the right part: "total point:"
-      sum = subject_points[0];
-      sum = sum + subject_points[1];
-      sum = sum + subject_points[2];
-      sum = sum + subject_points[3];
-      sum = sum + subject_points[4];
+      sum = 0;
+      subject_points.forEach(function(Number){
+        sum += Number;
+      });
       $("#sum_indicate").text(sum);
       // write the process to output the average point referring to the above here
       average = sum / subject_points.length;
@@ -59,7 +57,7 @@ $(document).ready(function(){
       let achievement = get_achievement();
       let pass_fail = get_pass_or_failure();
       // By writing the following, if you click the button of  as “Your"final judge", "Your grade is (the value of" rank "is put here). A process is implemented in which a light blue balloon with the text “(The value of“ judgment ”) is is output.
-      $('#declaration').append(`<label id="alert-indicate" class="alert alert-info">Your grade is ${achievement}. You ${pass_fail}!!!</label>`);
+      $('#declaration').append(`<label id="alert-indicate" class="alert alert-info">Your grade is ${achievement}.You ${pass_fail}!!!</label>`);
     };
   
     $('#national_language, #english, #mathematics, #science, #society').change(function() {
@@ -75,6 +73,7 @@ $(document).ready(function(){
     });
   
     $('#btn-declaration').click(function() {
+      $('#declaration').text("");
       judgement();
     });
   });
